@@ -3,25 +3,30 @@ import Button from "../components/Button";
 import Panel from "../components/Panel"
 // import useCounter from "../hooks/useCounter"; 
 
+const INCREMENT_COUNT = "increment";
+const DECREMENT_COUNT = "decrement";
+const ADD_TO_VALUE = "value-to-add";
+const SUBMIT_VALUE_TO_COUNT = "value-to-submit";
+
 const reducer = (state, action) => {
 
     switch (action.type) {
-        case "increment":
+        case INCREMENT_COUNT:
             return {
                 ...state,
                 count: state.count + 1,
             }
-        case "decrement":
+        case DECREMENT_COUNT:
             return {
                 ...state,
                 count: state.count - 1,
             }
-        case "value-to-add":
+        case ADD_TO_VALUE:
             return {
                 ...state,
                 valueToAdd: action.payload,
             }
-        case "value-to-submit":
+        case SUBMIT_VALUE_TO_COUNT:
             return {
                 ...state,
                 count: state.count + state.valueToAdd,
@@ -46,21 +51,21 @@ function CounterPage({ initialCount }) {
 
     const increment = () => {
         // setCount(count + 1);
-        dispatch({ type: "increment" })
+        dispatch({ type: INCREMENT_COUNT })
     }
     const decrement = () => {
         // setCount(count - 1);
-        dispatch({ type: "decrement" })
+        dispatch({ type: DECREMENT_COUNT })
     }
     const handleChange = (e) => {
         const value = parseInt(e.target.value) || 0;
-        dispatch({ type: "value-to-add", payload: value })
+        dispatch({ type: ADD_TO_VALUE, payload: value })
     }
     const handleSubmit = (e) => {
         e.preventDefault();
         // setCount(count + valueToAdd);
         // setValueToAdd(0);
-        dispatch({ type: "value-to-submit" })
+        dispatch({ type: SUBMIT_VALUE_TO_COUNT })
     }
 
     return (
